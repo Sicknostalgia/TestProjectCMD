@@ -41,12 +41,9 @@ public class PlayerCombat : MonoBehaviour
         //Vector2 dir = ((Vector2)aimPos - (Vector2)transform.position).normalized;
         Vector2 dir = aimer.direction.normalized;
         lastAimDir = dir;
-        dir.Normalize();
-        Debug.Log(dir);
-        Vector2 directi = transform.position - aimer.direction;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Converts direction to angle in degrees
 
-        ObjectPoolSystem.SpawnObject(partSystem.gameObject, transform.position, Quaternion.Euler(0,0,angle)); ;
+        ObjectPoolSystem.SpawnObject(partSystem.gameObject, transform.position, Quaternion.Euler(0,0,angle));
         Debug.DrawRay(transform.position, dir * rayLength, Color.red, 0.1f);
 
         int hits = Physics2D.RaycastNonAlloc(transform.position, dir, hitResults, rayLength, enemyLayer);
