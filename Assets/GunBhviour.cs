@@ -4,13 +4,16 @@ using UniRx;
 
 public class GunBhviour : MonoBehaviour
 {
-    [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer gpxSprite;
     [SerializeField] SpriteRenderer gunSprite;
+
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] InputManager inputManager;
+
     [SerializeField] Aimer aim;
+    [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rb;
+
     private Vector2 origScale;
 
     private void Start()

@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed = 3;
     [SerializeField] Camera cam;
-    PlayerInput plyrInpt;
+
     [SerializeField]private InputManager inputManager;
     Vector2 mvmnt;
     Vector2 msPos;

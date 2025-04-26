@@ -7,6 +7,7 @@ public class PlayerCombat : MonoBehaviour
     public float rayLength = 10f;
     public int damage;
     public LayerMask enemyLayer;
+    public ParticleSystem partSystem;
     private float lastShootTime = -999f;
     private RaycastHit2D[] hitResults = new RaycastHit2D[5];
     private Vector2 lastAimDir = Vector2.right;
@@ -40,6 +41,13 @@ public class PlayerCombat : MonoBehaviour
         //Vector2 dir = ((Vector2)aimPos - (Vector2)transform.position).normalized;
         Vector2 dir = aimer.direction.normalized;
         lastAimDir = dir;
+        dir.Normalize();
+        Debug.Log(dir);
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Converts direction to angle in degrees
+
+/*        ObjectPoolSystem.SpawnObject(partSystem.gameObject, transform.position, Quaternion.Euler(angle));*/
+        Debug.DrawRay(transform.position, dir * rayLength, Color.red, 0.1f);
 
         int hits = Physics2D.RaycastNonAlloc(transform.position, dir, hitResults, rayLength, enemyLayer);
 
@@ -61,5 +69,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, (Vector2)transform.position + lastAimDir * rayLength);
+
+        //Gizmos.DrawLine()
     }
 }

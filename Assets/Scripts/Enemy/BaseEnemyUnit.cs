@@ -8,15 +8,16 @@ public abstract class BaseEnemyUnit : MonoBehaviour
     protected enum State { Move, Attack, Hit, Death }
 
     protected State currentState;
+    private Subject<State> stateChanged = new Subject<State>();
+
     protected Transform player;
     protected Animator animator;
     protected bool isDead = false;
 
-    [Header("Enemy Data")]
+    [Header("Enemy stats")]
     [SerializeField] protected EnemySO enemyData;
 
 
-    private Subject<State> stateChanged = new Subject<State>();
     private CompositeDisposable disposables = new CompositeDisposable();
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackDmg;
