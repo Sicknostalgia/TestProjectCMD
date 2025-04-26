@@ -40,6 +40,7 @@ public abstract class BaseEnemyUnit : MonoBehaviour
         {
             Debug.Log("Animator found.");
         }
+            isDead = false;
 
         if (enemyData != null)
         {
@@ -48,7 +49,6 @@ public abstract class BaseEnemyUnit : MonoBehaviour
             attackRange = enemyData.attackRange;
             fovAngle = enemyData.fovAngle;
             health = enemyData.health;
-            isDead = false;
         }
 
         Observable.EveryUpdate()
