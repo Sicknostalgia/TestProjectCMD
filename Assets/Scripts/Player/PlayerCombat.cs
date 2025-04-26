@@ -44,7 +44,7 @@ public class PlayerCombat : MonoBehaviour
         dir.Normalize();
         Debug.Log(dir);
         Vector2 directi = transform.position - aimer.direction;
-        float angle = Mathf.Atan2(directi.y, directi.x) * Mathf.Rad2Deg; // Converts direction to angle in degrees
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Converts direction to angle in degrees
 
         ObjectPoolSystem.SpawnObject(partSystem.gameObject, transform.position, Quaternion.Euler(0,0,angle)); ;
         Debug.DrawRay(transform.position, dir * rayLength, Color.red, 0.1f);
