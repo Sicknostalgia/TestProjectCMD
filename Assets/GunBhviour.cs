@@ -8,7 +8,6 @@ public class GunBhviour : MonoBehaviour
     [SerializeField] SpriteRenderer gunSprite;
 
     [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] InputManager inputManager;
 
     [SerializeField] Aimer aim;
     [SerializeField] Animator animator;
@@ -19,7 +18,7 @@ public class GunBhviour : MonoBehaviour
     private void Start()
     {
         origScale = gunSprite.transform.localScale;
-        inputManager.OnAttackPressed.Subscribe(_ => GunScale());
+        InputManager.Inspance.OnAttackPressed.Subscribe(_ => GunScale());
     }
 
     private void GunScale()

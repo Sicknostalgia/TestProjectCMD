@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CombatHold",
+                    "type": "Button",
+                    "id": "33323e9b-2b6a-46e0-9dbb-b43a2e5b4e5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -108,6 +117,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Combat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ac295f4-0711-4d52-b267-55f0c911182e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CombatHold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

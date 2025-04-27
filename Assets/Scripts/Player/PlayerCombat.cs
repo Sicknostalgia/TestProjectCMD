@@ -14,15 +14,14 @@ public class PlayerCombat : MonoBehaviour
     private Vector2 currentMouseWorldPos;
 
     [SerializeField] Aimer aimer;
-    [SerializeField] private InputManager inputManager;
 
     public SoundID gunSound; 
     private void OnEnable()
     {
-       inputManager.OnMousePosition
+       InputManager.Inspance.OnMousePosition
             .Subscribe(UpdateMousePosition)
             .AddTo(this);
-        inputManager.OnAttackPressed.Subscribe(_ =>
+        InputManager.Inspance.OnAttackPressed.Subscribe(_ =>
         {
             Debug.Log("Attack pressed at: " + currentMouseWorldPos); // attack position relative to player
             TryShoot(currentMouseWorldPos);
@@ -44,7 +43,7 @@ public class PlayerCombat : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Converts direction to angle in degrees
 
         ObjectPoolSystem.SpawnObject(partSystem.gameObject, transform.position, Quaternion.Euler(0,0,angle));
-        Debug.DrawRay(transform.position, dir * rayLength, Color.red, 0.1f);
+        //Debug.DrawRay(transform.position, dir * rayLength, Color.red, 0.1f);
 
         int hits = Physics2D.RaycastNonAlloc(transform.position, dir, hitResults, rayLength, enemyLayer);
 

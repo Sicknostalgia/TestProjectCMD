@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public Subject<Unit> OnEnemyDied = new Subject<Unit>();
     public Subject<int> OnPlayerDamaged = new Subject<int>();
     public Subject<Unit> OnPlayerDied = new Subject<Unit>();
-    [SerializeField] private InputManager inputManager;
 
     private void Awake()
     {

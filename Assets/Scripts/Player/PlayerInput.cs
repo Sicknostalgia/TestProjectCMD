@@ -53,6 +53,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CombatHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""33323e9b-2b6a-46e0-9dbb-b43a2e5b4e5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Combat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ac295f4-0711-4d52-b267-55f0c911182e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CombatHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,6 +255,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_MousePos = m_Gameplay.FindAction("MousePos", throwIfNotFound: true);
         m_Gameplay_Combat = m_Gameplay.FindAction("Combat", throwIfNotFound: true);
+        m_Gameplay_CombatHold = m_Gameplay.FindAction("CombatHold", throwIfNotFound: true);
         // OffGameplay
         m_OffGameplay = asset.FindActionMap("OffGameplay", throwIfNotFound: true);
         m_OffGameplay_KeyboardNav = m_OffGameplay.FindAction("KeyboardNav", throwIfNotFound: true);
@@ -303,6 +324,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_MousePos;
     private readonly InputAction m_Gameplay_Combat;
+    private readonly InputAction m_Gameplay_CombatHold;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
@@ -310,6 +332,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @MousePos => m_Wrapper.m_Gameplay_MousePos;
         public InputAction @Combat => m_Wrapper.m_Gameplay_Combat;
+        public InputAction @CombatHold => m_Wrapper.m_Gameplay_CombatHold;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -328,6 +351,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Combat.started += instance.OnCombat;
             @Combat.performed += instance.OnCombat;
             @Combat.canceled += instance.OnCombat;
+            @CombatHold.started += instance.OnCombatHold;
+            @CombatHold.performed += instance.OnCombatHold;
+            @CombatHold.canceled += instance.OnCombatHold;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -341,6 +367,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Combat.started -= instance.OnCombat;
             @Combat.performed -= instance.OnCombat;
             @Combat.canceled -= instance.OnCombat;
+            @CombatHold.started -= instance.OnCombatHold;
+            @CombatHold.performed -= instance.OnCombatHold;
+            @CombatHold.canceled -= instance.OnCombatHold;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -417,6 +446,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnCombat(InputAction.CallbackContext context);
+        void OnCombatHold(InputAction.CallbackContext context);
     }
     public interface IOffGameplayActions
     {

@@ -3,6 +3,7 @@ using UniRx;
 using System;
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Inspance { get; private set; }
     [field: SerializeField] private PlayerInput playerInput;
     private Subject<Vector2> moveSubject = new Subject<Vector2>();
     private Subject<Vector2> mousePosSubject = new Subject<Vector2>(); // To track mouse position
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        Inspance = this;
         playerInput = new PlayerInput(); // Assuming you're using Unity's new Input System
         SetupInputActions();
     }

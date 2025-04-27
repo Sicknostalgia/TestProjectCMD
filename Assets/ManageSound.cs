@@ -8,11 +8,10 @@ public class ManageSound : MonoBehaviour
 {
     public SoundID gunSound;
     public SoundID enemyHop;
-    public InputManager inputManager;
     // Start is called before the first frame update
     void Start()
     {
-        inputManager.OnAttackPressed.Subscribe(PlayAttackSFX).AddTo(this);
+        InputManager.Inspance.OnAttackPressed.Subscribe(PlayAttackSFX).AddTo(this);
 
     }
 
