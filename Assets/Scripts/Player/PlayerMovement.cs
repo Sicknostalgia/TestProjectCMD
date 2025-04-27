@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 3;
     [SerializeField] Camera cam;
 
+    [SerializeField]private InputManager inputManager;
     Vector2 mvmnt;
     Vector2 msPos;
 
@@ -22,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Inspance.OnMoveInput.Subscribe(OnMovement).AddTo(this);
-        InputManager.Inspance.OnMousePosition.Subscribe(OnMousePos).AddTo(this);
+        inputManager.OnMoveInput.Subscribe(OnMovement).AddTo(this);
+        inputManager.OnMousePosition.Subscribe(OnMousePos).AddTo(this);
 
     }
 
