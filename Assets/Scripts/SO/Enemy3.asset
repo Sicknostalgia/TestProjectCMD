@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   attakDmg: 8
-  attackRange: 1.3
+  attackRange: 1.72
   fovAngle: 90
   health: 70

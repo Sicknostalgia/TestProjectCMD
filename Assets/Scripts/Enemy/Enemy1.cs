@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class Enemy1 : BaseEnemyUnit
 {
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
 }

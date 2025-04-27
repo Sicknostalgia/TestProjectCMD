@@ -40,7 +40,7 @@ public abstract class BaseEnemyUnit : MonoBehaviour
         {
             Debug.Log("Animator found.");
         }
-            isDead = false;
+        isDead = false;
 
         if (enemyData != null)
         {
@@ -52,7 +52,7 @@ public abstract class BaseEnemyUnit : MonoBehaviour
         }
 
         Observable.EveryUpdate()
-.Where(_ => currentState == State.Move && !isDead && player !=null)
+.Where(_ => currentState == State.Move && !isDead && player != null)
 .Subscribe(_ =>
 {
     MoveTowardsPlayer();
@@ -85,6 +85,16 @@ public abstract class BaseEnemyUnit : MonoBehaviour
             BroAudio.Play(attackSound);
         }
     }
+    public virtual void TryHitPlayer() // Call in animation frame
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+        // float angle = Vector2.Angle(transform.right, player.position - transform.position);
+
+        if (distance <= attackRange /*&& angle <= fovAngle / 2f*/)
+        {
+            GameManager.Instance.OnPlayerDamaged.OnNext(attackDmg);
+        }
+    }
     public virtual void TakeDamage(float amount)
     {
         if (isDead) return;
@@ -114,6 +124,7 @@ public abstract class BaseEnemyUnit : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         if (!isDead)
         {
+            Debug.Log("Transitioning to Move state.");
             currentState = State.Move;
             stateChanged.OnNext(State.Move);
         }
@@ -134,18 +145,6 @@ public abstract class BaseEnemyUnit : MonoBehaviour
         ObjectPoolSystem.ReturnObjectToPool(gameObject);
     }
     // Call this via Animation Event during attack animation
-    public virtual void TryHitPlayer() // Call in animation frame
-    {
-        float distance = Vector2.Distance(transform.position, player.position);
-        // float angle = Vector2.Angle(transform.right, player.position - transform.position);
-
-        if (distance <= attackRange /*&& angle <= fovAngle / 2f*/)
-        {
-            GameManager.Instance.OnPlayerDamaged.OnNext(attackDmg);
-        }
-        currentState = State.Move;
-        stateChanged.OnNext(State.Move);
-    }
 
     private void OnDrawGizmosSelected()
     {
